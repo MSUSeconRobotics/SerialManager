@@ -19,6 +19,12 @@ A process that runs in the background to handle the sending and receiving of USB
 This process was originally from a Mississippi State CSE Senior Project.
 
 ## How to set up
+1) Clone this repository, or at least the .py file, into ~/SerialManager. If another location is preferred that is fine as long as you replace global references to your preferred location.  
+2) Navigate to /etc/init.d  
+3) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
+4) Whatever is under the 'start' command will be run at startup.
+5) As root in a terminal, execute `update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
+6) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 
 ## How to use
 

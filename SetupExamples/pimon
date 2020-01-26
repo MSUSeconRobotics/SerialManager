@@ -1,0 +1,31 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		pimon
+# Required-Start:	$local_fs $network
+# Required-Stop:	$local_fs
+# Default-Start:	2
+# Default-Stop:		0
+# Short-Description:	pimon
+# Description:		wireless pi monitor daemon
+### END INIT INFO
+
+start() {
+    echo "starting pimon"
+    cd /home/pi/PiMon
+    pipenv run python app.py
+}
+
+case "$1" in 
+
+  start)
+    start
+  ;;
+
+  stop)
+    echo "stopping"
+    sudo pkill -9 -f app.py
+  ;;
+
+esac
+exit 0
