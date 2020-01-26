@@ -27,6 +27,8 @@ This process was originally from a Mississippi State CSE Senior Project.
 6) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 
 ## How to use
+The set up should automatically run the file in /etc/init.d and /etc/rc2.d on startup. Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
+Currently untested, but additional cases might be adle to be added to the /etc/init.d file for more custom commands such as restarting.
 
 ## Structure
 The Manager is listening to a dedicated requests channel. Whenever a process sends somethng to that channel, it will be added to the Manager's volatile queue. Processes will form their request with plain strings with no newline at the end. The format is `<Reply channel>:<Message>`  
