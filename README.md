@@ -21,3 +21,10 @@ Please note that the Manager can **never guarantee** the sending of the message 
 
 Below is a diagram of this structure:
 ![Block and arrow diagram depicting the Serial Manager's structure](/Pictures/SerialManagerDiagram.png)
+
+Red names: Independent processes or threads
+Rounded squares: USB ports
+Sky blue ReDis components:
+- Solid arrow: Publishing
+- Dashed arrow: Reading from subscriptions
+- Circles: Individual channels
