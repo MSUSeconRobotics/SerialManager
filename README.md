@@ -1,5 +1,5 @@
 # SerialManager
-A process that runs in the background to handle the sending and receiving of USB data between a Raspberry Pi and an Arduino. Build to be independent of it's consumers, SerialManager uses a ReDis publish-subscribe structure so that any other process may request to send data.
+A process that runs in the background to handle the sending and receiving of USB data between a Raspberry Pi and an Arduino. Build to be independent of it's consumers, SerialManager uses a Redis publish-subscribe structure so that any other process may request to send data.
 
 #### Benefits:
 - Prevent collisions between processes accessing Pi's serial port
@@ -19,6 +19,8 @@ A process that runs in the background to handle the sending and receiving of USB
 This process was originally from a Mississippi State CSE Senior Project.
 
 ## How to set up
+Prior to this, it may require a similar process to establish the Redis server. I do not know.
+
 1) Clone this repository, or at least the .py file, into ~/SerialManager. If another location is preferred that is fine as long as you replace global references to your preferred location.  
 2) Navigate to /etc/init.d  
 3) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
@@ -47,7 +49,7 @@ Below is a diagram of this structure:
 
 Red names: Independent processes or threads
 Rounded squares: USB ports
-Sky blue ReDis components:
+Sky blue Redis components:
 - Solid arrow: Publishing
 - Dashed arrow: Reading from subscriptions
 - Circles: Individual channels
