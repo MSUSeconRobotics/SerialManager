@@ -52,6 +52,7 @@ Below will describe how the system works and how to expand upon it.
 
 ### How to Develop
 If a new library or external service is added, it must be added to the pipfile. This is done by navigating to the directory, running `pipenv shell`, then running `pipenv install <library name>`
+Once all the needed libraries have been installed, run `pipenv lock` to solidify the changes.
 
 ### Structure
 The Manager is listening to a dedicated requests channel. Whenever a process sends somethng to that channel, it will be added to the Manager's volatile queue. Processes will form their request with plain strings with no newline at the end. The format is `<Reply channel>:<Message>`  
