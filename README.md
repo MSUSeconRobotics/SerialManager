@@ -21,18 +21,39 @@ This process was originally from a Mississippi State CSE Senior Project.
 ## How to set up
 Prior to this, it may require a similar process to establish the Redis server. I do not know.
 
-1) Clone this repository, or at least the .py file, into ~/SerialManager. If another location is preferred that is fine as long as you replace global references to your preferred location.  
-2) Navigate to /etc/init.d  
-3) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
+Install Pipenv onto the Pi:
+1) Ensure pip is using python3 with `pip --version`
+2) Install pipenv with `sudo -H pip install -U pipenv`
+
+Install the Repository:
+1) Clone this repository into ~/SerialManager. If another location is preferred that is fine as long as you know how to execute the python script.  
+2) In the script's directory, run `pipenv install --dev`  
+3) Navigate to /etc/init.d  
+4) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
 4) Whatever is under the 'start' command will be run at startup.
 5) As root in a terminal, execute `update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
 6) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 
 ## How to use
+### init.d
 The set up should automatically run the file in /etc/init.d and /etc/rc2.d on startup. Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 Currently untested, but additional cases might be adle to be added to the /etc/init.d file for more custom commands such as restarting.
 
-## Structure
+### Pipenv
+To run the python script, run it using pipenv. This creates a veritual environment that automatically has the packages described in the pipfile. The advantage is that the Pi only needs pipenv installed, and pipenv will handle any other library needed.  
+
+To run the python script with pipenv, navigate to the directory, call `pipenv run <terminal command>`, an example is `pipenv run python app.py`.  
+Alternatively, you can run `pipenv shell` and have access to a terminal in the pipenv virtual environment.
+
+---
+
+## Maintenance
+Below will describe how the system works and how to expand upon it.
+
+### How to Develop
+If a new library or external service is added, it must be added to the pipfile. This is done by navigating to the directory, running `pipenv shell`, then running `pipenv install <library name>`
+
+### Structure
 The Manager is listening to a dedicated requests channel. Whenever a process sends somethng to that channel, it will be added to the Manager's volatile queue. Processes will form their request with plain strings with no newline at the end. The format is `<Reply channel>:<Message>`  
 Examples:
 ```
