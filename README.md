@@ -10,6 +10,7 @@ A process that runs in the background to handle the sending and receiving of USB
 #### Items of note:
 - Run-on-startup procedure is difficult to set up
 - No serial operations are 'safe', cannot ensure transmission or reply
+- Permissions can be finicky, check for root vs. user permissions
 - Some manual configuration is necessary
   *  Baudrate
   *  Request channel name
@@ -27,11 +28,11 @@ Install Pipenv onto the Pi:
 
 Install the Repository:
 1) Clone this repository by running `git clone https://github.com/MSUSeconRobotics/SerialManager.git` Note this file's location so that you can execute the python script.  
-2) In the script's directory, run `pipenv install --dev`  
+2) In the script's directory, run `sudo pipenv install --dev`  
 3) Navigate to /etc/init.d  
 4) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
 5) Whatever is under the 'start' command will be run at startup.
-6) As root in a terminal, execute `update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
+6) As root in a terminal, execute `sudo update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
 7) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 
 ## How to use
