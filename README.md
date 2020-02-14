@@ -27,12 +27,12 @@ Install Pipenv onto the Pi:
 
 Install the Repository:
 1) Clone this repository by running `git clone https://github.com/MSUSeconRobotics/SerialManager.git` Note this file's location so that you can execute the python script.  
-2) In the script's directory, run `pipenv install --dev`  
+2) In the script's directory, run `python --version` then `pipenv install --dev --python <version>` while substituting your current version for the `<version>` marker (likely 3.5).  
 3) Navigate to /etc/init.d  
 4) As root, create a file similar to that in the SetupExamples folder. Please note the lack of file extension.
-4) Whatever is under the 'start' command will be run at startup.
-5) As root in a terminal, execute `update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
-6) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
+5) Whatever is under the 'start' command will be run at startup.
+6) As root in a terminal, execute `update-rc.d <FileName> defaults` where \<FileName> is replaced by your file's name without the < >.
+7) Test it! Run the service manually with `sudo /etc/init.d/<FileName start` and stop the service manually with `sudo /etc/init.d/<FileName> stop`  
 
 ## How to use
 ### init.d
