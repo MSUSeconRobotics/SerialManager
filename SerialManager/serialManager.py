@@ -37,6 +37,7 @@ def main():
 
   # establish serial communcation
   arduinoPort = getArduinoPort() #blocking
+  redisConnection.set('Pi SerialManager', 'Opening serial comm with: Port[' + str(arduinoPort) + '] Baud[' + str(baudrate) + '] Timeout[' + str(serialTimeout) + ']')
   arduinoSerial = serial.Serial(arduinoPort, baudrate=baudrate, timeout=serialTimeout)
   redisConnection.publish(managerChannel, 'connected:%s' % arduinoPort)
 
@@ -47,6 +48,7 @@ def main():
         # Extract where to send Arduino's reply and what message to send
         # <channel to send reply>:<message to send to Arduino>
         # Split string only at the first colon (:)
+        redisConnection.set('Pi SerialManager', 'Recieved request: ' + str(request['data']))
         replyChannel, message = request['data'].split(':',1)
       except:
         # Ignore malformed input
@@ -129,6 +131,7 @@ def isPortAlive(port):
 
 # Blocking function until an Arduino port is found
 def getArduinoPort():
+  redisConnection.set('Pi SerialManager', 'Getting Arduino port')
   # Keep trying to find a port while none are found
   while findArduinoPort() == None:
     time.sleep(1)
