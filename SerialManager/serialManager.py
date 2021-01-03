@@ -20,7 +20,7 @@ import time
 * PySerial documentation
    https://buildmedia.readthedocs.org/media/pdf/pyserial/latest/pyserial.pdf 
 '''
-
+redisConnection = None
 
 def main():
   # Define default configuration
@@ -29,7 +29,8 @@ def main():
   baudrate = 115200
   serialTimeout = 2
 
-  # establish redis and pubsub connections 
+  # establish redis and pubsub connections
+  global redisConnection
   redisConnection = redis.StrictRedis(decode_responses=True)
   subscriptions = redisConnection.pubsub(ignore_subscribe_messages=True)
   subscriptions.subscribe(requestChannel)
